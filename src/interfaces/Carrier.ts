@@ -1,4 +1,4 @@
-export interface Courier {
+export interface Carrier {
   id: number;
   name: string;
   color: string;

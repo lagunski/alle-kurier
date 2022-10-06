@@ -25,7 +25,7 @@ interface Props {
   price: number;
 }
 
-const CourierCard: FC<Props> = ({ color, name, price }) => {
+const CarrierCard: FC<Props> = ({ color, name, price }) => {
   return (
     <Wrapper color={color}>
       <Title>{name}</Title>
@@ -34,4 +34,4 @@ const CourierCard: FC<Props> = ({ color, name, price }) => {
   );
 };
 
-export default CourierCard;
+export default CarrierCard;

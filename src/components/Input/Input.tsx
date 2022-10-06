@@ -1,9 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-interface Props {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   unit: string;
-  id: string;
   label: string;
 }
 
@@ -41,19 +40,20 @@ const Point = styled.div`
   justify-content: center;
 `;
 
-const Input: FC<Props> = ({ unit, label, id }) => {
+const Input: FC<Props> = ({ unit, label, ...props }) => {
   return (
     <div>
-      <Label htmlFor={id}>{label}</Label>
+      <Label htmlFor={props.id}>{label}</Label>
       <InputWrapper>
         <StyledInput
-          id={id}
+          id={props.id}
           onKeyPress={event => {
             if (!/[0-9.]/.test(event.key)) {
               event.preventDefault();
             }
           }}
           min={0}
+          {...props}
           // onBlur={el.onBlurHandler}
           // defaultValue={el.value}
         />
