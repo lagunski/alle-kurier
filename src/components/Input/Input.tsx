@@ -7,6 +7,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Label = styled.label`
+  font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.4rem;
   display: block;
@@ -54,8 +55,6 @@ const Input: FC<Props> = ({ unit, label, ...props }) => {
           }}
           min={0}
           {...props}
-          // onBlur={el.onBlurHandler}
-          // defaultValue={el.value}
         />
         <Point>{unit}</Point>
       </InputWrapper>

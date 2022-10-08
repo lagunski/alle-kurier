@@ -1,6 +1,26 @@
-# Название
-## Описание
-## Инструкция по запуску
+# Carriers
+
+## Description
+
+The application allows you to search for carriers by parameters such as: height, length,
+width, weight, shipment from point or from door, delivery to point or to door.
+
+## Getting started
+
+1. Clone the repo:
+   ```sh
+   git clone https://github.com/lagunski/alle-kurier.git
+   ```
+2. Install NPM packages:
+   ```sh
+   npm install
+   ```
+3. Create a .env file in the root folder and enter the api url:
+   ```js
+   REACT_APP_API_URL=https://ak-frontend-task.vercel.app/
+   ```
+
+
 
 ## Available Scripts
 

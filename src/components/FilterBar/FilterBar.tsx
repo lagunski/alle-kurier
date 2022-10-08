@@ -1,8 +1,8 @@
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 import styled from 'styled-components';
 import Input from '../Input/Input';
 import { Filters } from '../../interfaces/Filters';
-import Checkbox from '../Checkbox/Checkbox';
+import { Checkbox } from '../Checkbox/Checkbox';
 
 const Wrapper = styled.div`
   border: 0.2rem solid #e1e3e9;
@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 const Title = styled.div`
   font-size: 2.4rem;
   font-weight: 600;
-  margin-bottom: 1.6rem;
+  margin-bottom: 2.4rem;
 `;
 
 const InputsWrapper = styled.div`
@@ -33,31 +33,48 @@ interface Props {
   setFilters: (filters: Filters) => void;
 }
 
-const FilterBar: FC<Props> = ({ filters, setFilters }) => {
-  const [checkedFromPoint, setCheckedFromPoint] = useState(false);
-  const [checkedFromDoor, setCheckedFromDoor] = useState(false);
-  const [checkedToPoint, setCheckedToPoint] = useState(false);
-  const [checkedToDoor, setCheckedToDoor] = useState(false);
+export const FilterBar: FC<Props> = ({ filters, setFilters }) => {
   const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>, filterName: keyof Filters) => {
     setFilters({ ...filters, [filterName]: +e.currentTarget.value });
   };
+
+  const checkboxChangeHandler = (e: ChangeEvent<HTMLInputElement>, filterName: keyof Filters) => {
+    setFilters({ ...filters, [filterName]: e.target.checked });
+  };
+
   return (
     <Wrapper>
       <Title>Wyceń przesyłkę</Title>
       <InputsWrapper>
         <Input value={filters?.maxWeight || ''} onChange={e => inputChangeHandler(e, 'maxWeight')} id='weight' label='Waga' unit='kg' />
         <Input value={filters?.maxLength || ''} onChange={e => inputChangeHandler(e, 'maxLength')} id='length' label='Długość' unit='cm' />
-        <Input value={filters?.maxHeight || ''} onChange={e => inputChangeHandler(e, 'maxHeight')} id='height' label='Wysokość' unit='kg' />
-        <Input value={filters?.maxWidth || ''} onChange={e => inputChangeHandler(e, 'maxWidth')} id='width' label='Szerokość' unit='kg' />
+        <Input value={filters?.maxHeight || ''} onChange={e => inputChangeHandler(e, 'maxHeight')} id='height' label='Wysokość' unit='cm' />
+        <Input value={filters?.maxWidth || ''} onChange={e => inputChangeHandler(e, 'maxWidth')} id='width' label='Szerokość' unit='cm' />
       </InputsWrapper>
       <CheckboxesWrapper>
-        <Checkbox label={'W punkcie'} checked={checkedFromPoint} onChange={e => setCheckedFromPoint(e.target.checked)} />
-        <Checkbox label={'Podjazd kuriera'} checked={checkedFromDoor} onChange={e => setCheckedFromDoor(e.target.checked)} />
-        <Checkbox label={'W punkcie'} checked={checkedToPoint} onChange={e => setCheckedToPoint(e.target.checked)} />
-        <Checkbox label={'Podjazd kuriera'} checked={checkedToDoor} onChange={e => setCheckedToDoor(e.target.checked)} />
+        <Checkbox
+          labelTop='Nadanie'
+          label='W punkcie'
+          checked={filters?.fromPointShipment || false}
+          onChange={e => checkboxChangeHandler(e, 'fromPointShipment')}
+        />
+        <Checkbox
+          label='Podjazd kuriera'
+          checked={filters?.fromDoorShipment || false}
+          onChange={e => checkboxChangeHandler(e, 'fromDoorShipment')}
+        />
+        <Checkbox
+          labelTop='Odbiór'
+          label='W punkcie'
+          checked={filters?.toPointDelivery || false}
+          onChange={e => checkboxChangeHandler(e, 'toPointDelivery')}
+        />
+        <Checkbox
+          label='Podjazd kuriera'
+          checked={filters?.toDoorDelivery || false}
+          onChange={e => checkboxChangeHandler(e, 'toDoorDelivery')}
+        />
       </CheckboxesWrapper>
     </Wrapper>
   );
 };
-
-export default FilterBar;
