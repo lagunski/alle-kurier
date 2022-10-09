@@ -20,7 +20,7 @@ const Title = styled.div`
 const InputsWrapper = styled.div`
   display: flex;
   gap: 2.4rem;
-  margin-bottom: 40px;
+  margin-bottom: 4rem;
 `;
 
 const CheckboxesWrapper = styled.div`
