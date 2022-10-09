@@ -10,7 +10,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 
 const CheckboxWrapper = styled.div`
   display: flex;
-  justify-items: center;
+  align-items: end;
   margin-top: 1.2rem;
 `;
 const StyledCheckbox = styled.input.attrs({ type: 'checkbox' })`
